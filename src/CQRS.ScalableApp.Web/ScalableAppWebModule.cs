@@ -37,6 +37,14 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Autofac.Core;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore.Internal;
+using CQRS.ScalableApp.Players;
+using CQRS.ScalableApp.Models.Players;
+using MediatR;
+using System.Collections.Generic;
+using System;
 
 namespace CQRS.ScalableApp.Web;
 
@@ -93,6 +101,22 @@ public class ScalableAppWebModule : AbpModule
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
+        // Register your services
+
+
+       // context.bui
+
+        context.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+        //  builder.Services.AddSingleton<FakeDataStore>();
+
+       // context.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+
+        //context.Services.AddTransient(typeof(GetPlayersHandler));
+        //context.Services.AddTransient(typeof(GetPlayersQuery));
+        //context.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+        // context.Services.AddMediatR(Assembly.GetExecutingAssembly());
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)

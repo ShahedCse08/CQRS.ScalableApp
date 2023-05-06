@@ -9,6 +9,7 @@ namespace CQRS.ScalableApp.Players
 {
     public interface IPlayerAppService
     {
+        Task<object> CreateTest(PlayerDto player);
         Task<IEnumerable<PlayerDto>> GetPlayersListAsync();
         Task<PlayerDto> GetPlayerByIdAsync(int id);
         Task<PlayerDto> CreatePlayerAsync(PlayerDto player);
