@@ -104,19 +104,6 @@ public class ScalableAppWebModule : AbpModule
         // Register your services
 
 
-       // context.bui
-
-        context.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-
-        //  builder.Services.AddSingleton<FakeDataStore>();
-
-       // context.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-
-
-        //context.Services.AddTransient(typeof(GetPlayersHandler));
-        //context.Services.AddTransient(typeof(GetPlayersQuery));
-        //context.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-        // context.Services.AddMediatR(Assembly.GetExecutingAssembly());
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
