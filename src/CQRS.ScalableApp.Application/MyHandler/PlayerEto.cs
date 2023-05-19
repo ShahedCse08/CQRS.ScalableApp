@@ -1,7 +1,9 @@
-﻿namespace CQRS.ScalableApp.MyHandler
+﻿using Volo.Abp.Domain.Entities.Events.Distributed;
+
+namespace CQRS.ScalableApp.MyHandler
 {
-    public class PlayerEto
-    {
+    public class PlayerEto : EntityEto<int>
+    {     
         public string Name { get; set; }
     }
 }

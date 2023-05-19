@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.EventBus;
 using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.Uow;
 
 namespace CQRS.ScalableApp.Players.Commands
 {
@@ -18,12 +19,15 @@ namespace CQRS.ScalableApp.Players.Commands
 
         private readonly IRepository<Player> _playerAppService;
         private readonly IDistributedEventBus _distributedEventBus;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public PlayerCommandService(IRepository<Player> playerAppService, IDistributedEventBus distributedEventBus)
+        public PlayerCommandService(IRepository<Player> playerAppService, IDistributedEventBus distributedEventBus, IUnitOfWorkManager unitOfWorkManager)
         {
             _playerAppService = playerAppService;
             _distributedEventBus = distributedEventBus;
-           
+            _unitOfWorkManager = unitOfWorkManager;
+
+
 
         }
 
@@ -31,12 +35,17 @@ namespace CQRS.ScalableApp.Players.Commands
         {
             var entity = ObjectMapper.Map<PlayerDto, Player>(player);
             var dd = await _playerAppService.InsertAsync(entity,true);
+
+            var uow = _unitOfWorkManager.Current;
+           // await uow.SaveChangesAsync();
+
             var dto = ObjectMapper.Map<Player, PlayerDto>(dd);
 
             await _distributedEventBus.PublishAsync(
              new PlayerEto
-             {
-                 Name = entity.Name
+             {   
+                 Id = entity.Id,
+                 Name = entity.Name + entity.Id
              }
          );
             return dto;

@@ -1,5 +1,6 @@
 ﻿using CQRS.ScalableApp.Models.Players;
 using CQRS.ScalableApp.MyHandler;
+using CQRS.ScalableApp.Players.Dtos;
 using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Domain.Entities.Events.Distributed;
@@ -38,6 +39,7 @@ public class ScalableAppApplicationModule : AbpModule
             options.AutoEventSelectors.AddAll();
 
             options.EtoMappings.Add<Player, PlayerEto>();
+           
 
            
         });
