@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CQRS.ScalableApp.Models.Players;
+using CQRS.ScalableApp.MyHandler;
 using CQRS.ScalableApp.Players.Dtos;
 
 namespace CQRS.ScalableApp;
@@ -13,6 +14,7 @@ public class ScalableAppApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
 
         CreateMap<PlayerDto, Player>().ReverseMap();
+        CreateMap<Player, PlayerEto>().ReverseMap();
        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CQRS.ScalableApp.Models.Players;
+using CQRS.ScalableApp.MyHandler;
 using CQRS.ScalableApp.Players.Dtos;
 using MediatR;
 using System;
@@ -17,21 +18,30 @@ namespace CQRS.ScalableApp.Players.Commands
 
         private readonly IRepository<Player> _playerAppService;
         private readonly IDistributedEventBus _distributedEventBus;
-        private readonly IEventBus _eventBus;
 
-        public PlayerCommandService(IRepository<Player> playerAppService, IEventBus eventBus)
+        public PlayerCommandService(IRepository<Player> playerAppService, IDistributedEventBus distributedEventBus)
         {
             _playerAppService = playerAppService;
-            _eventBus = eventBus;
+            _distributedEventBus = distributedEventBus;
+           
 
         }
 
         public async Task<PlayerDto> CreatePlayerAsync(PlayerDto player)
         {
             var entity = ObjectMapper.Map<PlayerDto, Player>(player);
-            await _playerAppService.InsertAsync(entity);
-            var dto = ObjectMapper.Map<Player, PlayerDto>(entity);
+            var dd = await _playerAppService.InsertAsync(entity,true);
+            var dto = ObjectMapper.Map<Player, PlayerDto>(dd);
+
+            await _distributedEventBus.PublishAsync(
+             new PlayerEto
+             {
+                 Name = entity.Name
+             }
+         );
             return dto;
+
+         
         }
 
         public async Task DeletePlayerAsync(PlayerDto player)
