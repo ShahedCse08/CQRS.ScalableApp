@@ -1,4 +1,7 @@
-﻿using CQRS.ScalableApp.Models.Players;
+﻿using AutoMapper.Internal.Mappers;
+using CQRS.ScalableApp.CosmosDB;
+using CQRS.ScalableApp.Models.Players;
+using CQRS.ScalableApp.Models.Players.ETO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +21,17 @@ namespace CQRS.ScalableApp.MyHandler
 
         public Task HandleEventAsync(PlayerEto eventData)
         {
-            var Id = eventData.Id;
-            var Name = eventData.Name;
+            using (var context = new CosmoDBContext())
+            {
+
+                context.Database.EnsureCreated();
+                context.Players.Add(eventData);
+                context.SaveChanges();
+            }
             return Task.CompletedTask;
         }
 
+
         
-    }
+       }
 }

@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CQRS.ScalableApp.CosmosDB\CQRS.ScalableApp.CosmosDB.csproj" />
     <ProjectReference Include="..\CQRS.ScalableApp.Domain\CQRS.ScalableApp.Domain.csproj" />
     <ProjectReference Include="..\CQRS.ScalableApp.Application.Contracts\CQRS.ScalableApp.Application.Contracts.csproj" />
   </ItemGroup>

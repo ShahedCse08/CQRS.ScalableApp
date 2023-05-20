@@ -1,4 +1,5 @@
 ﻿using CQRS.ScalableApp.Models.Players;
+using CQRS.ScalableApp.Models.Players.ETO;
 using CQRS.ScalableApp.MyHandler;
 using CQRS.ScalableApp.Players.Dtos;
 using MediatR;
