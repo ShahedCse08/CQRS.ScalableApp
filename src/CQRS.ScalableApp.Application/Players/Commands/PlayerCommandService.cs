@@ -35,19 +35,11 @@ namespace CQRS.ScalableApp.Players.Commands
         {
             var entity = ObjectMapper.Map<PlayerDto, Player>(player);
             var dd = await _playerAppService.InsertAsync(entity,true);
-
-            var uow = _unitOfWorkManager.Current;
-           // await uow.SaveChangesAsync();
-
             var dto = ObjectMapper.Map<Player, PlayerDto>(dd);
+            var eto = ObjectMapper.Map<Player, PlayerEto>(dd);
 
-            await _distributedEventBus.PublishAsync(
-             new PlayerEto
-             {   
-                 Id = entity.Id,
-                 Name = entity.Name + entity.Id
-             }
-         );
+            await _distributedEventBus.PublishAsync(eto);
+
             return dto;
 
          

@@ -11,14 +11,18 @@ using Volo.Abp.EventBus.Distributed;
 namespace CQRS.ScalableApp.MyHandler
 {
     public class MyHandler :
-        IDistributedEventHandler<EntityCreatedEto<PlayerEto>>,
+        IDistributedEventHandler<PlayerEto>,
         ITransientDependency
     {      
       
 
-        public Task HandleEventAsync(EntityCreatedEto<PlayerEto> eventData)
+        public Task HandleEventAsync(PlayerEto eventData)
         {
-            throw new NotImplementedException();
+            var Id = eventData.Id;
+            var Name = eventData.Name;
+            return Task.CompletedTask;
         }
+
+        
     }
 }

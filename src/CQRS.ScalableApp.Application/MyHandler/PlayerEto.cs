@@ -2,8 +2,10 @@
 
 namespace CQRS.ScalableApp.MyHandler
 {
-    public class PlayerEto : EntityEto<int>
+    public class PlayerEto
     {     
         public string Name { get; set; }
+        public string Id { get; set; }
+
     }
 }
