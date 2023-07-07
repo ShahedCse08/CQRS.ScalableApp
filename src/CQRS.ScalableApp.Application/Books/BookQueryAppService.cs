@@ -10,7 +10,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace CQRS.ScalableApp.Books
 {
-    public class BookQueryAppService : ScalableAppAppService
+    public class BookQueryAppService : ScalableAppAppService, IBookQueryAppService
     {
         private readonly IRepository<Book> _bookRepository;
         public BookQueryAppService(IRepository<Book> bookRepository)

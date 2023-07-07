@@ -38,8 +38,8 @@ public class ScalableAppMenuContributor : IMenuContributor
            0,
            new ApplicationMenuItem(
                ScalableAppMenus.Home,
-               l["Menu:Player"],
-               "/Players",
+               l["Books"],
+               "/Books",
                icon: "fas fa-home",
                order: 1
 

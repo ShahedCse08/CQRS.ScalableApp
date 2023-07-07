@@ -21,6 +21,7 @@ public class ScalableAppApplicationAutoMapperProfile : Profile
 
         CreateMap<Book, BookDto>().ReverseMap();
         CreateMap<CreateUpdateBookDto, Book>().ReverseMap();
+        CreateMap< Book, CreateUpdateBookDto>().ReverseMap();
 
     }
 }
