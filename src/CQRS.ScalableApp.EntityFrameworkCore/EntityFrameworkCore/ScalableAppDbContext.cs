@@ -1,4 +1,5 @@
-﻿using CQRS.ScalableApp.Models.Players;
+﻿using CQRS.ScalableApp.Models;
+using CQRS.ScalableApp.Models.Players;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -54,6 +55,7 @@ public class ScalableAppDbContext :
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
     public DbSet<Player> Players { get; set; }
+    public DbSet<Book> Books { get; set; }
 
     #endregion
 
@@ -92,6 +94,14 @@ public class ScalableAppDbContext :
         {
             b.ToTable(ScalableAppConsts.DbTablePrefix + "Players", ScalableAppConsts.DbSchema);
             b.ConfigureByConvention(); 
+        });
+
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable(ScalableAppConsts.DbTablePrefix + "Books",
+                ScalableAppConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
         });
     }
 }

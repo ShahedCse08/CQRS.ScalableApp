@@ -4,6 +4,7 @@ using CQRS.ScalableApp.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace CQRS.ScalableApp.Migrations
 {
     [DbContext(typeof(ScalableAppDbContext))]
-    partial class ScalableAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230707093207_Created_Book_Entity")]
+    partial class CreatedBookEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
