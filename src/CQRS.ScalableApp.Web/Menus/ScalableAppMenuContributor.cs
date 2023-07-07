@@ -34,6 +34,18 @@ public class ScalableAppMenuContributor : IMenuContributor
             )
         );
 
+        context.Menu.Items.Insert(
+           0,
+           new ApplicationMenuItem(
+               ScalableAppMenus.Home,
+               l["Menu:Player"],
+               "/Players",
+               icon: "fas fa-home",
+               order: 1
+
+           )
+       );
+
         if (MultiTenancyConsts.IsEnabled)
         {
             administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
