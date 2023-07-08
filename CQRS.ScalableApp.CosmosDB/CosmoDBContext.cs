@@ -1,4 +1,5 @@
-﻿using CQRS.ScalableApp.Models.Players;
+﻿using CQRS.ScalableApp.Models.Books.ETO;
+using CQRS.ScalableApp.Models.Players;
 using CQRS.ScalableApp.Models.Players.ETO;
 using CQRS.ScalableApp.Players.Dtos;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,8 @@ namespace CQRS.ScalableApp.CosmosDB
                 databaseName: "ScalableApp");
         }
         public DbSet<PlayerEto> Players { get; set; }
-       
+        public DbSet<BookEto> Books { get; set; }
+
+
     }
 }

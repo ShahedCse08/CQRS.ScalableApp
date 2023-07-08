@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CQRS.ScalableApp.Books;
 using CQRS.ScalableApp.Models;
+using CQRS.ScalableApp.Models.Books.ETO;
 using CQRS.ScalableApp.Models.Players;
 using CQRS.ScalableApp.Models.Players.ETO;
 using CQRS.ScalableApp.MyHandler;
@@ -22,6 +23,9 @@ public class ScalableAppApplicationAutoMapperProfile : Profile
         CreateMap<Book, BookDto>().ReverseMap();
         CreateMap<CreateUpdateBookDto, Book>().ReverseMap();
         CreateMap< Book, CreateUpdateBookDto>().ReverseMap();
+
+        CreateMap<Book, BookEto>().ReverseMap();
+        CreateMap<BookEto, BookDto>().ReverseMap();
 
     }
 }

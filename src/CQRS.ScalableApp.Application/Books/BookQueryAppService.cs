@@ -1,4 +1,6 @@
-﻿using CQRS.ScalableApp.Models;
+﻿using CQRS.ScalableApp.CosmosDB;
+using CQRS.ScalableApp.Models;
+using CQRS.ScalableApp.Models.Books.ETO;
 using CQRS.ScalableApp.Models.Players;
 using System;
 using System.Collections.Generic;
@@ -25,7 +27,15 @@ namespace CQRS.ScalableApp.Books
                 input.Sorting = nameof(Book.Name);
             }
 
-            var books = await _bookRepository.GetListAsync();
+            // var books = await _bookRepository.GetListAsync();
+
+            var context = new CosmoDBContext();
+            List<BookEto> books = context.Books.ToList();
+            
+            // Perform further operations with the retrieved books
+            
+
+
 
             var totalCount = input.Filter == null
                 ? await _bookRepository.CountAsync()
@@ -34,7 +44,7 @@ namespace CQRS.ScalableApp.Books
 
             return new PagedResultDto<BookDto>(
                 totalCount,
-                ObjectMapper.Map<List<Book>, List<BookDto>>(books)
+                ObjectMapper.Map<List<BookEto>, List<BookDto>>(books)
             );
         }
     }
